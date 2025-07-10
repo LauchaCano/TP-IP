@@ -1,6 +1,6 @@
 class Card:
     def __init__(self, name, height, base, weight, image, types, user=None, id=None):
-        self.name = name  # Nombre del pokemon
+        self.name = name.capitalize()  # Nombre del pokemon
         self.height = height  # ALTURA
         self.weight = weight  # PESO
         self.base = base  # NIVEL BASE
@@ -8,7 +8,7 @@ class Card:
         self.user = user  # Usuario asociado (si corresponde)
         self.id = id  # ID único (si corresponde)
         self.types = types or []  # Asegura que sea una lista por defecto
-
+        
     def __str__(self):
         return (f'name: {self.name}, height: {self.height}, weight: {self.weight}, '
                 f'base: {self.base}, image: {self.image}, user: {self.user}, id: {self.id}')
