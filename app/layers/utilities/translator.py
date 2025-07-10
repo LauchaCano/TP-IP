@@ -2,18 +2,6 @@
 import ast
 from app.layers.utilities.card import Card
 
-# Usado cuando la información viene de la API, para transformarla en una Card.
-def fromRequestIntoCard(poke_data):
-    card = Card(
-        id=poke_data.get('id'),
-        name=poke_data.get('name').capitalize(),       
-        height=poke_data.get('height'),
-        weight=poke_data.get('weight'),
-        base=poke_data.get('base_experience'),
-        image=safe_get(poke_data, 'sprites', 'other', 'official-artwork', 'front_default'),
-        types=getTypes(poke_data)
-    )
-    return card
 
 # recupera los tipos del JSON
 def getTypes(poke_data):
@@ -22,6 +10,41 @@ def getTypes(poke_data):
         t = safe_get(type, 'type','name' )
         types.append(t)
     return types
+
+# Funciones auxiliares 
+def getHp(poke_data):
+    for stat in poke_data.get('stats', []):
+        if stat.get('stat', {}).get('name') == 'hp':
+            return stat.get('base_stat',0)
+    return 0
+
+def getAttack(poke_data):
+    for stat in poke_data.get('stats', []):
+        if stat.get('stat', {}).get('name') == 'attack':
+            return stat.get('base_stat',0)
+    return 0 
+   
+def getDefense(poke_data):
+    for stat in poke_data.get('stats', []):
+        if stat.get('stat', {}).get('name') == 'defense':
+            return stat.get('base_stat',0)
+    return 0
+
+
+# Usado cuando la información viene de la API, para transformarla en una Card.
+def fromRequestIntoCard(poke_data):
+    card = Card(
+        id=poke_data.get('id'),
+        name=poke_data.get('name').capitalize(),       
+        base=poke_data.get('base_experience'),
+        image=safe_get(poke_data, 'sprites', 'other', 'official-artwork', 'front_default'),
+        types=getTypes(poke_data),
+        hp=getHp(poke_data),
+        attack=getAttack(poke_data),
+        defense=getDefense(poke_data)
+    )
+    return card
+
 
 # Usado cuando la información viene del template, para transformarla en una Card antes de guardarla en la base de datos.
 def fromTemplateIntoCard(templ): 
