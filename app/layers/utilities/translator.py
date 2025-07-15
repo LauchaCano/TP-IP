@@ -8,7 +8,7 @@ def getTypes(poke_data):
     types = []
     for type in poke_data.get('types'):
         t = safe_get(type, 'type','name' )
-        types.append(t)
+        types.append(t.capitalize())
     return types
 
 # Funciones auxiliares 
