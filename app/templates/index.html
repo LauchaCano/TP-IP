@@ -1,5 +1,7 @@
 {% extends 'header.html' %} {% block content %} {% if request.user.is_authenticated %}
 <h2 class="text-center">Bienvenido {{ user.username | upper }}!</h2>
+<img src='.../static/images/titulo_pokemon.png' alt="Pokemon Title" class="img-fluid mx-auto d-block mb-3">
+<p class="text-center">¡Explorá el mundo de los Pokémon!</p>
 {% else %}
 <h2 class="text-center">Bienvenido!</h2>
 {% endif %}

@@ -20,8 +20,9 @@ def search(request):
     name = request.POST.get('query', '')
 
     # si el usuario ingresó algo en el buscador, se deben filtrar las imágenes por dicho ingreso.
-    if (name != ''):
-        images = []
+    if (name.strip() != ''):
+        images = services.filterByCharacter(name)
+    
         favourite_list = []
 
         return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
@@ -30,10 +31,10 @@ def search(request):
 
 # función utilizada para filtrar por el tipo del Pokemon
 def filter_by_type(request):
-    type = request.POST.get('type', '')
+    type_ = request.POST.get('type', '')
 
-    if type != '':
-        images = [] # debe traer un listado filtrado de imágenes, segun si es o contiene ese tipo.
+    if type_ != '':
+        images = services.filterByType(type_) # debe traer un listado filtrado de imágenes, segun si es o contiene ese tipo.
         favourite_list = []
 
         return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })

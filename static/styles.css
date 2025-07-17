@@ -4,6 +4,17 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-image: url('../static/imagenes/fondo_pokemon.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: cadetblue;
+    margin: 0%;
+}
+
+
 .table-responsive {
     margin: 30px 0;
 }

@@ -25,21 +25,26 @@ def todas_las_imagenes():
 # función que filtra según el nombre del pokemon.
 def filterByCharacter(name):
     filtered_cards = []
-
+    name = name.strip().lower()
+    if not name:
+        return filtered_cards
     for card in todas_las_imagenes():
         # debe verificar si el name está contenido en el nombre de la card, antes de agregarlo al listado de filtered_cards.
-        filtered_cards.append(card)
-
+        if name in card.name.lower():
+            # si coincide, se añade al listado de filtered_cards.
+            filtered_cards.append(card) 
+    # retornamos el listado filtrado.
     return filtered_cards
 
 # función que filtra las cards según su tipo.
 def filterByType(type_filter):
     filtered_cards = []
-
+    type_filter = type_filter.strip().lower()
     for card in todas_las_imagenes():
-        # debe verificar si la casa de la card coincide con la recibida por parámetro. Si es así, se añade al listado de filtered_cards.
-        filtered_cards.append(card)
-
+        for type_ in card.types:
+            if type_.lower() == type_filter:
+                filtered_cards.append(card)
+            
     return filtered_cards
 
 # añadir favoritos (usado desde el template 'home.html')
