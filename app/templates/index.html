@@ -1,11 +1,16 @@
-{% extends 'header.html' %} {% block content %} {% if request.user.is_authenticated %}
+{% extends 'header.html' %} {% block content %} {% if request.user.is_authenticated %} 
+{% load static %}
+<img src="{% static 'imagenes/titulo_pokemon.png' %}" alt="Bienvenida Pokémon" class="img-fluid rounded">
 <h2 class="text-center">Bienvenido {{ user.username | upper }}!</h2>
-<img src='.../static/images/titulo_pokemon.png' alt="Pokemon Title" class="img-fluid mx-auto d-block mb-3">
-<p class="text-center">¡Explorá el mundo de los Pokémon!</p>
 {% else %}
-<h2 class="text-center">Bienvenido!</h2>
+{% load static %}
+<div class="text-center fw-bold">
+    <h2 style="color: #000296a1;">Bienvenido a tu buscador</h2>
+    <img src="{% static 'imagenes/titulo_pokemon.png' %}" alt="Bienvenida Pokémon" style="width: 500px;" class="img-fluid rounded">
+</div>
+
 {% endif %}
 <p class="text-center">
-    Mirá las imágenes desde <a href="{% url 'home' %}">este link.</a>
+    Mirá las imágenes desde <a href="{% url 'home' %}">la galeria!</a>
 </p>
 {% endblock %}

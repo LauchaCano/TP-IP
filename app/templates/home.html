@@ -11,7 +11,7 @@
         </form>
     </div>
 
-    <div class="d-flex gap-1 col-2 mx-auto mb-3">
+    <div class="d-flex gap-2 justify-content-center mb-3">
         <form method="post" action="{% url 'filter_by_type' %}">
             {% csrf_token %}
             <input type="hidden" name="type" value="fire">
@@ -33,25 +33,48 @@
         <form method="post" action="{% url 'filter_by_type' %}">
             {% csrf_token %}
             <input type="hidden" name="type" value="poison">
-            <button type="submit" class="btn btn-success">VENENO</button>
+            <button type="submit" class="btn btn-dark">VENENO</button>
         </form>
     </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
         {% if images|length == 0 %}
         <h2 class="text-center">La búsqueda no arrojó resultados...</h2>
+        <div class="row">
         {% else %} {% for img in images %}
         <div class="col">
             <!-- evaluar si la imagen pertenece al tipo fuego, agua o planta -->
-            <div class="card border-success mb-3 ms-5" style="max-width: 540px; ">
-                 <div class="row g-0">
-                     <div class="col-md-4">
-                         <img src="{{ img.image }}" class="card-img-top"alt="imagen">
-                     </div>
-
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ img.name }} #{{ img.id }} <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Master Ball"></h3>
+            <div class="card border-success mb-3 ms-5" style="width: 300px; height: 300px; position: relative; overflow: hidden;">
+                <div style="
+                background-image: url('{{ img.image }}');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                opacity: 0.7;
+                overflow: hidden;      
+                ">
+            </div>
+                    <div class="row g-0">
+                        <div class="col-md-4 mb-4">
+                        <div style="
+                            position: relative;
+                            z-index: 2;
+                            color: #000; 
+                            display: flex;
+                            flex-direction: center;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100%;
+                            adding: 10px;
+                            text-align: center;
+                            ">
+                            <h5 class="card-title">{{ img.name }} #{{ img.id }} <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Master Ball"></h5>
                             <p class="card-text">
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     {% for poketype in img.types %}
